@@ -28,42 +28,59 @@ const DATA = [
   { id: 8, text: 'Card #8', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-01.jpg' },
 ];
 
-class App extends Component {
-
+class App extends React.Component {
   renderCard(item) {
     return (
-      <Card 
-        image={{uri: item.uri}}
-        title={item.text}
+      <Card
         key={item.id}
+        title={item.text}
+        image={{ uri: item.uri }}
       >
-        <Text style={{marginBottom: 10}}>
-          I can customize the card further.
+        <Text style={{ marginBottom: 10 }}>
+          I can customize the Card further.
         </Text>
-
-        <Button 
-          icon={{name: 'code', color: 'white'}}
-          backgroundColor='#03A9F4'
-          title='View Now!' 
+        <Button
+          icon={{ name: 'code' }}
+          backgroundColor="#03A9F4"
+          title="View Now!"
         />
       </Card>
-    )
+    );
+  }
+
+  renderNoMoreCards() {
+    return (
+      <Card title="All Done!">
+        <Text style={{ marginBottom: 10 }}>
+          There's no more content here!
+        </Text>
+        <Button
+          backgroundColor="#03A9F4"
+          title="Get more!"
+        />
+      </Card>
+    );
   }
 
   render() {
-    return(
-      <Fragment>
-        <SafeAreaView>
-          <ScrollView>
-            <Deck 
-              data={DATA}
-              renderCard={this.renderCard}
-            />
-          </ScrollView>
-        </SafeAreaView>
-      </Fragment>
-    )
+    return (
+      <View style={styles.container}>
+        <Deck
+          data={DATA}
+          renderCard={this.renderCard}
+          renderNoMoreCards={this.renderNoMoreCards}
+        />
+      </View>
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+});
 
 export default App;
